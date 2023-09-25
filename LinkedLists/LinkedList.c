@@ -86,9 +86,60 @@ struct Node* insert_end(struct Node* head, int data)
 
 
 //Now, since we understand how the creation of linked list works manually, let us try to automate the process of creating a linked list of 50 nodes. 
-
+for(int i=1; i<=50; i++)
+{
+	struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+	if(new_node==NULL)
+	{
+		printf("Memory Allocation failure");
+		return 1;
+	}
+	new_node->data=i;
+	new_node->next=head; //So essentially, every new node is being added to the first place
+	head = new_node; 
+}
+//Now, since the code allocates memory to linked list, we have to free that memory
+current = head;
+while(current != NULL)
+{
+	struct Node* temp = current;
+	current = current->next;
+	free(temp);
+}
 
 
 //Question: Lets write a C function to remove all occurence of "Hello" from the linked list we created above
+struct Node* delete_hello(struct Node* head)
+{
+	struct Node* current = head;
+	struct Node* prev = NULL;
+
+	while(current != NULL)
+	{
+		if(strcmp(current->data, "hello")==0)
+		{
+			//Check if the node is the head node, if it is, we would need to appoint the next node as the head
+			if(prev==NULL)
+			{
+				struct Node* temp = current;
+				current = current->next;
+				head = current;
+				free(temp);
+			}
+			else
+			{
+				prev->next = current->next;
+				free(current);
+				current = prev->next;
+			}
+		}
+		else
+		{
+			prev = current;
+			current = current->next;
+		}
+	}
+	return head;
+}
 
 
