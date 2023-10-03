@@ -109,19 +109,19 @@ while(current != NULL)
 
 
 //Question: Lets write a C function to remove all occurence of "Hello" from the linked list we created above
-struct Node* delete_hello(struct Node* head)
+struct node* delete_hello(struct node* head)
 {
-	struct Node* current = head;
-	struct Node* prev = NULL;
+	struct node* current = head;
+	struct node* prev = null;
 
-	while(current != NULL)
+	while(current != null)
 	{
 		if(strcmp(current->data, "hello")==0)
 		{
-			//Check if the node is the head node, if it is, we would need to appoint the next node as the head
-			if(prev==NULL)
+			//check if the node is the head node, if it is, we would need to appoint the next node as the head
+			if(prev==null)
 			{
-				struct Node* temp = current;
+				struct node* temp = current;
 				current = current->next;
 				head = current;
 				free(temp);
