@@ -9,15 +9,23 @@
 
 struct ListNode* insertGreatestCommonDivisors(struct ListNode* head){
     struct ListNode* current = head;
-    struct ListNode* new_node = NULL;
-    while(current != NULL && current->next != NULL)
+    //struct ListNode new_node = NULL;
+   
+    if(head == NULL || head->next == NULL)
     {
-        int gcd_val = gcd(current->val, current->next->val);
-        //struct ListNode* new_node = (struct ListNode*)malloc(sizeof(ListNode));
+        return head;
+    }
+    while(current!=NULL && current->next!=NULL)
+    {
+        struct ListNode* new_node =(struct ListNode*)malloc(sizeof(struct ListNode));
+        struct ListNode* temp = current->next;
+        int gcd_val = gcd(current->val, temp->val);
         new_node->val = gcd_val;
-        new_node->next = current->next;
+
         current->next = new_node;
+        new_node->next = temp;
         current = current->next->next;
+        
     }
     return head;
 }
